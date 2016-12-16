@@ -1,6 +1,3 @@
-from data import Data
-
-
 class Account:
 
     def __init__(self,data):

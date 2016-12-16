@@ -1,6 +1,8 @@
-from data import Data
-import itertools as it
 import copy
+
+from Modules_brand_new.Data import Data
+
+
 class Storage () :
 
 

@@ -8,15 +8,13 @@ analyze file/ store in Storage:
     store p_pattern in Storage
 
 """
-from statistics import mean
-import itertools as it
-from time import gmtime, strftime
-import re
-import sys
 import copy
-from prepareData import prepare_data
-from account import Account
+import itertools as it
+
 from data import Data
+
+from Modules_brand_new.account import Account
+from old.prepareData import prepare_data
 
 
 def vergleich3(b_pattern, s_pattern, sell_length, verlauf, prices):

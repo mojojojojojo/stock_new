@@ -12,7 +12,7 @@ def steigung(array):
         if tmp is 0:
             steig.append(0)
         else:
-            steig.append((i - tmp)/tmp)
+            steig.append(i - tmp)
         tmp = i
     return steig
 
