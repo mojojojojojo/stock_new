@@ -17,24 +17,23 @@ def gen_data():
     data.b_pattern = "0, 0"
     data.s_pattern = "0, 1"
     data.revenue_in_percent = 12
+    storage.update_data_pattern(data)
 
-    storage.update_data_pattern(data)
     data.b_pattern = "0, 1"
+    data.s_pattern = "0, 1"
+    data.revenue_in_percent = 12
     storage.update_data_pattern(data)
+
+    data.b_pattern = "0, 1"
     data.s_pattern = "0, 0, 1"
     data.revenue_in_percent = 20
     storage.update_data_pattern(data)
+
+    data.s_pattern = "0, 0, 1"
     data.b_pattern = "0, 1, 0"
+    data.revenue_in_percent = 20
     storage.update_data_pattern(data)
-    #for g in storage.data_patterns:
-        #for f in g:
-            #print("revenue in percentage",f.revenue_in_percent)
-            #print("b_pattern", f.b_pattern, "s_pattern", f.s_pattern)
 
-    #print("lksd",storage.data_patterns[1][0].revenue_in_percent)
-
-    #for f in storage.data_patterns[1]:
-        #print(f.revenue_in_percent)
 
     return storage
 
@@ -50,14 +49,14 @@ def test_load_save():
     for f in storage.data_patterns[3]:
         assert f.revenue_in_percent == 20
         assert len(storage.data_patterns[2]) == 2
-
+    os.remove("test.moj")
 
 def test_buy_data():
     storage = gen_data()
     buy_data = storage.get_relevant_buy_data(2)
     assert len(buy_data) == 3
     assert buy_data[1].b_pattern == "0, 1"
-    
+
 def test_sell_data():
     storage = gen_data()
     sell_data = storage.get_relevant_sell_data(3,"0, 1")
