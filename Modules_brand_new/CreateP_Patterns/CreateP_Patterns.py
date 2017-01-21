@@ -3,7 +3,13 @@ import itertools as it
 from Modules_brand_new.account import Account
 from Modules_brand_new.Data import Data
 import copy
-from prepareData import prepare_data
+from Modules_brand_new.CreateP_Patterns.prepareData import prepare_data
+
+
+
+
+
+
 class P_Patterns:
     def __init__(self):
         self.p_settings = PSettings()
@@ -27,30 +33,24 @@ class P_Patterns:
     def verifyP_Patterns(self,ergebnisse):
         p_patterns = []
         for f in ergebnisse:
-            if f.data.transactions != 0:
-                if  f.data.revenue_in_percent >=  self.p_settings.revenueThresh:
+            if f.data.transactions >= 1:
+                if  f.data.revenue_in_percent >=  self.p_settings.revenueThresh and f.data.winrate() > 0.0:
                     p_patterns.append(f)
-                    print("asdwad")
-        print("p_patterns",p_patterns)
+                    #print("asdwad")
+        #print("p_patterns",p_patterns)
         return p_patterns
 
     def findPatterns(self, b_pattern, s_pattern, verlauf, prices):
         data = Data()
-        pattern = b_pattern + s_pattern
-        #print(pattern)
+        pattern = " " + b_pattern + s_pattern
         account = Account(data)
         strt = 0
         flag = False
-        #print(verlauf.find(pattern, strt))
         while verlauf.find(pattern, strt) >= 0:
-            #print("nom")
-            #print(verlauf.find(pattern, strt), " pattern : " , pattern)
             strt = verlauf.find(pattern, strt) + len(b_pattern)
-            account('buy', prices[1][verlauf.count(",", 0, strt) - 1])
-            #print(strt)
-            account('sell', prices[2][verlauf.count(",", 0, strt) - 2 + self.p_settings.s_lenMax])
+            account('buy', prices[2][verlauf.count(",", 0, strt) - 1])
+            account('sell', prices[3][verlauf.count(",", 0, strt) - 2 + self.p_settings.s_lenMax])
             account.data.b_pattern = b_pattern
-            #print(b_pattern)
             account.data.s_pattern = s_pattern
             flag = True
         if flag:
@@ -59,7 +59,7 @@ class P_Patterns:
 
 
 
-    def extend_b_patterns(self, preis, array):
+    def extend_b_patterns(self, verlauf, prices):
 
         ergebnisse = []
 
@@ -70,21 +70,22 @@ class P_Patterns:
                 l = str(j)[1:-1]
                 data = Data()
                 data.s_pattern = copy.copy(x.data.s_pattern)
-                data.b_pattern = copy.copy(x.data.b_pattern) + l + " "
-                f = self.findPatterns(data.b_pattern,data.s_pattern,verlauf, preis)
+                data.b_pattern =  l + " " + copy.copy(x.data.b_pattern)
+                f = self.findPatterns(data.b_pattern,data.s_pattern,verlauf, prices)
                 if f :
                     ergebnisse.append(f)
-                    print(data.b_pattern , data.s_pattern)
+                    #print(data.b_pattern ,"|", data.s_pattern)
 
         self.p_patterns = self.verifyP_Patterns(ergebnisse)
-
-
+        #self.p_patterns = ergebnisse
+"""
 prices = [[1,2,3,4,5,3,1,4,5,2,5,2,8,1,1,1,1,1,1,1,1], [1,2,3,4,5,3,1,4,5,2,5,2,8,1,1,1,1,1,1,1,1],[1,2,3,4,5,3,1,4,5,2,5,2,8,1,1,1,1,1,1,1,1],[1,2,3,4,5,3,1,4,5,2,5,2,8,1,1,1,1,1,1,1,1]]
 p_patterns = P_Patterns()
-verlauf, prices = prepare_data(prices, p_patterns.p_settings.max_stg)
+verlauf, array = prepare_data(prices, p_patterns.p_settings.max_stg)
 
 for i in range(1):
-    p_patterns.extend_b_patterns(prices, verlauf)
+    p_patterns.extend_b_patterns(verlauf, array[2])
 
 for f in p_patterns.p_patterns:
     print(f.data.b_pattern,"||",f.data.s_pattern, "\t revenue -->", round(f.data.revenue_in_percent,1),"winrate -->", f.data.winrate())
+"""

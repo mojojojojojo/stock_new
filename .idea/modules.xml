@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$USER_HOME$/Dropbox/python/PycharmProjects/a_new_hope/.idea/a_new_hope.iml" filepath="$USER_HOME$/Dropbox/python/PycharmProjects/a_new_hope/.idea/a_new_hope.iml" />
       <module fileurl="file://$USER_HOME$/Dropboxneu/Dropbox/python/PycharmProjects/a_new_hope/.idea/a_new_hope.iml" filepath="$USER_HOME$/Dropboxneu/Dropbox/python/PycharmProjects/a_new_hope/.idea/a_new_hope.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../minitop2/.idea/minitop2.iml" filepath="$PROJECT_DIR$/../minitop2/.idea/minitop2.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/stock_new.iml" filepath="$PROJECT_DIR$/.idea/stock_new.iml" />
     </modules>
   </component>
