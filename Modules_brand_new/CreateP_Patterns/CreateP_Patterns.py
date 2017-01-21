@@ -3,7 +3,7 @@ import itertools as it
 from Modules_brand_new.account import Account
 from Modules_brand_new.Data import Data
 import copy
-from old.prepareData import prepare_data
+from prepareData import prepare_data
 class P_Patterns:
     def __init__(self):
         self.p_settings = PSettings()
@@ -18,19 +18,20 @@ class P_Patterns:
     def create_patterns(self):
         alles = list(it.product(self.p_settings.nr_elements, repeat=1))
         for j in alles:
-            for k in range(self.p_settings.s_lenMax +1):
                 l = str(j)[1:-1]
                 data = Data(s_pattern=(l + " " ))
                 account = Account(data)
                 self.p_patterns.append(account)
 
+
     def verifyP_Patterns(self,ergebnisse):
         p_patterns = []
         for f in ergebnisse:
             if f.data.transactions != 0:
-                winrate =  (1 - (f.data.transactions - f.data.successful_transac )/f.data.transactions) * 100
-                if winrate >= self.p_settings.winrateThresh and f.data.revenue_in_percent >=  self.p_settings.revenueThresh:
+                if  f.data.revenue_in_percent >=  self.p_settings.revenueThresh:
                     p_patterns.append(f)
+                    print("asdwad")
+        print("p_patterns",p_patterns)
         return p_patterns
 
     def findPatterns(self, b_pattern, s_pattern, verlauf, prices):
@@ -58,32 +59,32 @@ class P_Patterns:
 
 
 
-    def extend_p_patterns(self, preis, array):
-
+    def extend_b_patterns(self, preis, array):
 
         ergebnisse = []
-        alles = list(it.product(self.p_settings.nr_elements, repeat=1))
-        #print(alles)
-        for x in self.p_patterns:
 
+        i = 0
+        for x in self.p_patterns:
+            alles = list(it.product(self.p_settings.nr_elements, repeat=1))
             for j in alles:
                 l = str(j)[1:-1]
                 data = Data()
-                data.s_pattern = copy.copy(x.data.b_pattern) + l + " "
-                #print(data.s_pattern)
-                f = self.findPatterns(data.s_pattern,x.data.s_pattern,verlauf, preis)
+                data.s_pattern = copy.copy(x.data.s_pattern)
+                data.b_pattern = copy.copy(x.data.b_pattern) + l + " "
+                f = self.findPatterns(data.b_pattern,data.s_pattern,verlauf, preis)
                 if f :
                     ergebnisse.append(f)
-        #self.p_patterns = self.verifyP_Patterns(ergebnisse)
-        self.p_patterns = ergebnisse
+                    print(data.b_pattern , data.s_pattern)
 
+        self.p_patterns = self.verifyP_Patterns(ergebnisse)
 
 
 prices = [[1,2,3,4,5,3,1,4,5,2,5,2,8,1,1,1,1,1,1,1,1], [1,2,3,4,5,3,1,4,5,2,5,2,8,1,1,1,1,1,1,1,1],[1,2,3,4,5,3,1,4,5,2,5,2,8,1,1,1,1,1,1,1,1],[1,2,3,4,5,3,1,4,5,2,5,2,8,1,1,1,1,1,1,1,1]]
-verlauf, prices = prepare_data(prices, max_stg= 10)
 p_patterns = P_Patterns()
-p_patterns.extend_p_patterns(prices,verlauf)
+verlauf, prices = prepare_data(prices, p_patterns.p_settings.max_stg)
 
-print(len (p_patterns.p_patterns))
+for i in range(1):
+    p_patterns.extend_b_patterns(prices, verlauf)
+
 for f in p_patterns.p_patterns:
-    print(f.data.b_pattern,"||",f.data.s_pattern,  f.data.revenue_in_percent)
+    print(f.data.b_pattern,"||",f.data.s_pattern, "\t revenue -->", round(f.data.revenue_in_percent,1),"winrate -->", f.data.winrate())

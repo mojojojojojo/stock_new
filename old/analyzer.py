@@ -14,7 +14,7 @@ import itertools as it
 from data import Data
 
 from Modules_brand_new.account import Account
-from old.prepareData import prepare_data
+from prepareData import prepare_data
 
 
 def vergleich3(b_pattern, s_pattern, sell_length, verlauf, prices):

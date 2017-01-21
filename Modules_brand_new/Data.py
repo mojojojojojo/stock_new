@@ -10,5 +10,7 @@ class Data:
         return self.s_pattern.count(",") + 1
     def b_len(self):
         return self.b_pattern.count(",") + 1
+    def winrate(self):
+        return 1 - (self.transactions - self.successful_transac)/self.transactions
 
 
