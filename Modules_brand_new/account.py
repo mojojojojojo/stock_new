@@ -20,3 +20,5 @@ class Account:
                 self.bought_flag = False
             else:
                 print("ERROR : trying to sell but bought_flag = False")
+        else :
+            print("ERROR bs flag not set")
