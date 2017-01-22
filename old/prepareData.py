@@ -36,7 +36,7 @@ def prepare_data(array, max_stg=7):
     for m in steig:
         if m > 0:
             middle_array.append(abs(m))
-    middle = mean(middle_array)
+    middle = mean(middle_array)/7777
     tmp /= 100000
     middle /= 100000
     while True:

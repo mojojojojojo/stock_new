@@ -2,9 +2,6 @@
 storage.data_patterns[x]  -> x = sell_len
 
 
-
-
-
 """
 
 import os
@@ -32,11 +29,11 @@ class Storage () :
             if f.b_pattern == data.b_pattern and f.s_pattern == data.s_pattern:
                 self.data_patterns[data.s_len()].insert(self.data_patterns[data.s_len()].index(f),copy.copy(data))
                 self.data_patterns[data.s_len()].remove(f)
-                #print("changed")
+                print("changed")
                 k = 1
         if(k is 0):
             self.data_patterns[data.s_len()].append(copy.copy(data))
-            #print("added")
+            print("added")
 
     def get_relevant_buy_data(self, buy_len):
         array = []
@@ -82,7 +79,7 @@ class Storage () :
                         g.transactions = 0
 
                     self.data_patterns[k].append(g)
-            print("file loaded")
+            #print("file loaded")
             f.close()
 
     def save_format_file(self):
@@ -97,5 +94,5 @@ class Storage () :
                     f.write(str(x.s_pattern) + "\n")
                     f.write(str(x.successful_transac) + "\n")
                     f.write(str(x.transactions) + "\n")
-        print("file saved")
+        #print("file saved")
         f.close()

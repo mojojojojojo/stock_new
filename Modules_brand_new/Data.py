@@ -7,9 +7,9 @@ class Data:
         self.successful_transac = 0
         self.revenue_in_percent  = 0
     def s_len(self):
-        return self.s_pattern.count(",") + 1
+        return self.s_pattern.count(",")
     def b_len(self):
-        return self.b_pattern.count(",") + 1
+        return self.b_pattern.count(",")
     def winrate(self):
         return 1 - (self.transactions - self.successful_transac)/self.transactions
 

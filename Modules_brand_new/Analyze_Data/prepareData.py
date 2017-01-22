@@ -43,7 +43,7 @@ def prepare_data(array, max_stg=7):
 
     for m in steig:
         middle_array.append(abs(m))
-    middle = harmonic_mean(middle_array)
+    middle = mean(middle_array)
     #print("adsfafasfas", middle)
     tmp /=      1000
     middle /=   1000

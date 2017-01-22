@@ -1,20 +1,19 @@
-from Modules_brand_new.CreateP_Patterns.PSettings import PSettings
+from Modules_brand_new.Analyze_Data.PSettings import PSettings
 import itertools as it
 from Modules_brand_new.account import Account
 from Modules_brand_new.Data import Data
 import copy
-from Modules_brand_new.CreateP_Patterns.prepareData import prepare_data
-
-
-
+from Modules_brand_new.Analyze_Data.prepareData import prepare_data
 
 
 
 class P_Patterns:
-    def __init__(self):
+    def __init__(self,array):
         self.p_settings = PSettings()
         self.p_patterns = []
+        self.verlauf , self.prices = prepare_data(array,self.p_settings.max_stg)
         self.create_patterns()
+
 
     def create_basic_patterns(self,length):
         basic_pattern = list(it.product(self.p_settings.nr_elements, repeat=length))
@@ -25,9 +24,18 @@ class P_Patterns:
         alles = list(it.product(self.p_settings.nr_elements, repeat=1))
         for j in alles:
                 l = str(j)[1:-1]
-                data = Data(s_pattern=(l + " " ))
-                account = Account(data)
-                self.p_patterns.append(account)
+
+                data = Data(b_pattern=( " " + l ))
+                #print(data.b_pattern)
+                f = self.findPatterns(data.b_pattern, data.s_pattern, self.verlauf, self.prices)
+                if f:
+                    self.p_patterns.append(f)
+
+
+
+
+                #account = Account(data)
+                #self.p_patterns.append(account)
 
 
     def verifyP_Patterns(self,ergebnisse):
@@ -42,7 +50,7 @@ class P_Patterns:
 
     def findPatterns(self, b_pattern, s_pattern, verlauf, prices):
         data = Data()
-        pattern = " " + b_pattern + s_pattern
+        pattern = b_pattern + s_pattern
         account = Account(data)
         strt = 0
         flag = False
@@ -59,7 +67,7 @@ class P_Patterns:
 
 
 
-    def extend_b_patterns(self, verlauf, prices):
+    def extend_b_patterns(self):
 
         ergebnisse = []
 
@@ -70,8 +78,9 @@ class P_Patterns:
                 l = str(j)[1:-1]
                 data = Data()
                 data.s_pattern = copy.copy(x.data.s_pattern)
-                data.b_pattern =  l + " " + copy.copy(x.data.b_pattern)
-                f = self.findPatterns(data.b_pattern,data.s_pattern,verlauf, prices)
+                data.b_pattern = " " +  l + copy.copy(x.data.b_pattern)
+                #print("sdfef" ,data.b_pattern)
+                f = self.findPatterns(data.b_pattern,data.s_pattern,self.verlauf, self.prices)
                 if f :
                     ergebnisse.append(f)
                     #print(data.b_pattern ,"|", data.s_pattern)
