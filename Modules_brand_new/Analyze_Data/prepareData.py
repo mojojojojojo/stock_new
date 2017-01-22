@@ -43,7 +43,7 @@ def prepare_data(array, max_stg=7):
 
     for m in steig:
         middle_array.append(abs(m))
-    middle = mean(middle_array)
+    middle = mean(middle_array) *1.5
     #print("adsfafasfas", middle)
     tmp /=      1000
     middle /=   1000
@@ -71,8 +71,8 @@ def prepare_data(array, max_stg=7):
         else:
             steig[k] = int(0)
 
-    for g in range(len(steig)):
-        steig[g] = steig[g] + max_stg
+    #for g in range(len(steig)):
+        #steig[g] = steig[g] + max_stg
 
     #print("Steigungspattern")
     #print(steig)
