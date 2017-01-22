@@ -6,6 +6,7 @@ class Data:
         self.s_pattern = s_pattern
         self.successful_transac = 0
         self.revenue_in_percent  = 0
+        self.S_len = 0
     def s_len(self):
         return self.s_pattern.count(",")
     def b_len(self):

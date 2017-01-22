@@ -15,7 +15,9 @@ class Account:
             if self.bought_flag == True:
                 if  -((self.b_price- price) / self.b_price) > 0:
                     self.data.successful_transac += 1
-                self.data.revenue_in_percent = ((-(self.b_price - float(price)) / self.b_price)*100 + self.data.revenue_in_percent)
+                self.data.revenue_in_percent = ((-(self.b_price - float(price)) /
+                self.b_price)*100 + self.data.revenue_in_percent * self.data.transactions)/(
+                self.data.transactions +1)
                 self.data.transactions += 1
                 self.bought_flag = False
             else:
