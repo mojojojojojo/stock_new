@@ -78,7 +78,7 @@ class P_Patterns:
                 l = str(j)[1:-1]
                 s_pattern = copy.copy(x.data.s_pattern)
                 b_pattern = " " +  l + copy.copy(x.data.b_pattern)
-                #print("sdfef" ,data.b_pattern)
+                #print("sdfef" , b_pattern , x.data.S_len)
                 f = self.findPatterns(x.data.S_len ,b_pattern,s_pattern,self.verlauf, self.prices)
                 if f :
                     ergebnisse.append(f)

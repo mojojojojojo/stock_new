@@ -21,7 +21,7 @@ class Storage () :
 
     def update_data_pattern(self,data):
         k= 0
-        while len(self.data_patterns) <= data.S_len:
+        while len(self.data_patterns) <= data.S_len :
             self.data_patterns.append([])
             #print("len(self.data_patterns)", len(self.data_patterns))
 
@@ -29,11 +29,11 @@ class Storage () :
             if f.b_pattern == data.b_pattern and f.s_pattern == data.s_pattern:
                 self.data_patterns[data.S_len].insert(self.data_patterns[data.S_len].index(f),copy.copy(data))
                 self.data_patterns[data.S_len].remove(f)
-                #print("changed")
+                print("changed", data.S_len)
                 k = 1
         if(k is 0):
             self.data_patterns[data.S_len].append(copy.copy(data))
-            #print("added")
+            print("added" , data.S_len)
 
     def get_relevant_buy_data(self, buy_len):
         array = []
@@ -48,6 +48,7 @@ class Storage () :
         array = []
         for f in self.data_patterns:
             for g in f:
+                #print("data")
                 #print(g.b_pattern, b_pattern , g.S_len, g.S_len == sell_len, g.b_pattern == b_pattern)
                 if g.S_len == sell_len and g.b_pattern == b_pattern:
                     array.append(g)

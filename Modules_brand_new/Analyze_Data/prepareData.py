@@ -78,7 +78,7 @@ def prepare_data(array, max_stg=7):
     print(steig)
     #print("maximale steigung = " + str(max(steig)))
     #print("maximaler abfall  = " + str(min(steig)))
-    steig_str = "[" + ", ".join(map(str, steig)) + "]"
+    steig_str = " " + ", ".join(map(str, steig))
     for k in range(len(array[2])):
         array[2][k] = float(round(array[2][k], 6))
 
