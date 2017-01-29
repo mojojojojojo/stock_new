@@ -85,7 +85,9 @@ def prepare_data(array, max_stg=7):
     for i in range(1000):
         array[2].append(array[2][-1])
         array[3].append(array[3][-1])
-
+    print(array[3][0])
+    print(array[3][1])
+    print(array[3][2])
     return steig_str, array
 
 

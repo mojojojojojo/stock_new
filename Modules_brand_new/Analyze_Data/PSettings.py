@@ -1,6 +1,6 @@
 
 class PSettings:
-    def __init__(self,b_lenMax = 3, s_lenMax =4,nr_elements = None, winrateThresh= -10, revenueThresh = 0.01):
+    def __init__(self,b_lenMax = 3, s_lenMax =5,nr_elements = None, winrateThresh= 0.5, revenueThresh = 0.1):
         self.winrateThresh = winrateThresh
         self.revenueThresh = revenueThresh
         self.b_lenMax = b_lenMax

@@ -54,6 +54,31 @@ class Storage () :
                     array.append(g)
         return array
 
+    def get_best_pattern(self):
+        array = []
+        for f in self.data_patterns:
+            for g in f:
+                print(g.S_len)
+                if len(array) <=10:
+                    array.append(g)
+                else:
+                    for k in array:
+                        if g.revenue_in_percent > k.revenue_in_percent:
+                            array.append(g)
+                            tmp = g
+                            #print(len(array))
+                            for i in array:
+                                if i.revenue_in_percent < tmp.revenue_in_percent:
+                                    tmp = i
+                            array.remove(i)
+                            #print("blup")
+                            break
+        return array
+
+
+
+
+
     def load_format_file(self):
         self.data_patterns = [[]]
         with open(self.connected_share+".moj") as f:

@@ -41,7 +41,7 @@ class P_Patterns:
         p_patterns = []
         for f in ergebnisse:
             if f.data.transactions >= 1:
-                if  f.data.revenue_in_percent >=  self.p_settings.revenueThresh and f.data.winrate() > 0.0:
+                if  f.data.revenue_in_percent >=  self.p_settings.revenueThresh and f.data.winrate() >= self.p_settings.winrateThresh:
                     p_patterns.append(f)
                     #print("asdwad")
         #print("p_patterns",p_patterns)
@@ -56,7 +56,7 @@ class P_Patterns:
         while verlauf.find(pattern, strt) >= 0:
             strt = verlauf.find(pattern, strt) + len(b_pattern)
             account('buy', prices[2][verlauf.count(",", 0, strt) - 1])
-            account('sell', prices[3][verlauf.count(",", 0, strt) - 2 + S_len])
+            account('sell', prices[2][verlauf.count(",", 0, strt) - 2 + S_len])
             account.data.b_pattern = b_pattern
             account.data.s_pattern = s_pattern
             account.data.S_len = S_len
@@ -84,8 +84,8 @@ class P_Patterns:
                     ergebnisse.append(f)
                     #print(f.data.b_pattern ,"|", f.data.s_pattern , f.data.S_len, k , l)
 
-        #self.p_patterns = self.verifyP_Patterns(ergebnisse)
-        self.p_patterns = ergebnisse
+        self.p_patterns = self.verifyP_Patterns(ergebnisse)
+        #self.p_patterns = ergebnisse
 """
 prices = [[1,2,3,4,5,3,1,4,5,2,5,2,8,1,1,1,1,1,1,1,1], [1,2,3,4,5,3,1,4,5,2,5,2,8,1,1,1,1,1,1,1,1],[1,2,3,4,5,3,1,4,5,2,5,2,8,1,1,1,1,1,1,1,1],[1,2,3,4,5,3,1,4,5,2,5,2,8,1,1,1,1,1,1,1,1]]
 p_patterns = P_Patterns()

@@ -1,7 +1,7 @@
 from LoadSave import open_file
 import Analyze_Data.CreateP_Patterns as Cpp
 from storage import Storage
-x = 1
+x = 10
 
 
 
@@ -38,10 +38,13 @@ for f in p_patterns.p_patterns:
 #p_patterns.p_patterns = p_patterns.verifyP_Patterns(p_patterns.p_patterns)
 f = []
 for  i in range(7):
-    f = f + storage.get_relevant_sell_data(i," 10, 9,")
+    f = f + storage.get_relevant_sell_data(i," 50, 50, 50,")
 print(len(f))
 for g in f:
-    print(" buy pattern " ,g.b_pattern , round(g.revenue_in_percent,3), g.S_len)
+    print(" buy pattern " ,g.b_pattern , round(g.revenue_in_percent,3), g.S_len , g.winrate())
+f = storage.get_best_pattern()
+for g in f:
+    print(" buy pattern " ,g.b_pattern , round(g.revenue_in_percent,3), g.S_len , g.winrate())
 
 """
 def live_analyse():
