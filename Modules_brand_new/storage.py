@@ -29,11 +29,11 @@ class Storage () :
             if f.b_pattern == data.b_pattern and f.s_pattern == data.s_pattern:
                 self.data_patterns[data.S_len].insert(self.data_patterns[data.S_len].index(f),copy.copy(data))
                 self.data_patterns[data.S_len].remove(f)
-                print("changed", data.S_len)
+                #print("changed", data.S_len)
                 k = 1
         if(k is 0):
             self.data_patterns[data.S_len].append(copy.copy(data))
-            print("added" , data.S_len)
+            #print("added" , data.S_len)
 
     def get_relevant_buy_data(self, buy_len):
         array = []

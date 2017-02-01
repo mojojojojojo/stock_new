@@ -1,7 +1,7 @@
 from LoadSave import open_file
 import Analyze_Data.CreateP_Patterns as Cpp
 from storage import Storage
-x = 10
+x = 1
 
 
 
@@ -61,26 +61,29 @@ def live_analyse():
         print(f.data.b_pattern, "||", f.data.s_pattern, "   \t revenue -->",
               round(f.data.revenue_in_percent, 1), "winrate -->", round(f.data.winrate(), 2),
               "transactions", f.data.transactions, "sell_len", f.data.S_len)
-
+    buyflag = False
     while(1):
 
         f = []
         ina =  input("Eingabe : ")
-        if q in ina :
+        if "q" in ina :
             break
         inall.append(ina)
-        if len(inall) >= p_patterns.p_settings.s_lenMax -1 :
+        if len(inall) >= 10:
             inall.remove(inall[0])
         print("actual String", inall)
 
-        inall_str =  " " +  ", ".join(map(str, inall)) + ","
+        inall_str =  " " +  ", ".join(map(str, inall[:2])) + ","
         print(inall_str)
-        for i in range(p_patterns.p_settings.s_lenMax ):
-            f = f + storage.get_relevant_sell_data(i, inall_str)
+        if buyflag is False:
+            for i in range(p_patterns.p_settings.s_lenMax ):
+                f = f + storage.get_relevant_sell_data(i, inall_str)
+        else:
 
         print(len(f))
         for g in f:
-            print(" buy pattern ", g.b_pattern, round(g.revenue_in_percent, 3), g.S_len)
+            if g.re
+            print(" buy pattern ", g.b_pattern, round(g.revenue_in_percent, 3), g.S_len , g.transactions)
 
 
 live_analyse()

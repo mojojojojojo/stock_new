@@ -84,8 +84,8 @@ class P_Patterns:
                     ergebnisse.append(f)
                     #print(f.data.b_pattern ,"|", f.data.s_pattern , f.data.S_len, k , l)
 
-        self.p_patterns = self.verifyP_Patterns(ergebnisse)
-        #self.p_patterns = ergebnisse
+        #self.p_patterns = self.verifyP_Patterns(ergebnisse)
+        self.p_patterns = ergebnisse
 """
 prices = [[1,2,3,4,5,3,1,4,5,2,5,2,8,1,1,1,1,1,1,1,1], [1,2,3,4,5,3,1,4,5,2,5,2,8,1,1,1,1,1,1,1,1],[1,2,3,4,5,3,1,4,5,2,5,2,8,1,1,1,1,1,1,1,1],[1,2,3,4,5,3,1,4,5,2,5,2,8,1,1,1,1,1,1,1,1]]
 p_patterns = P_Patterns()
